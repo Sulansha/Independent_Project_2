@@ -9,6 +9,7 @@ import turtle
 import PIL
 from PIL import ImageGrab
 import tkinter as tk
+import math
 
 
 def dump_gui():
@@ -52,6 +53,14 @@ def quadrilateral(length, width, rotation):
     t.left(90)
     t.fd(width)
 
+def r_triangle(base, height):
+    t.forward(base)
+    t.left(90)
+    t.forward(height)
+    hypotenuse = ((base**2)+(height**2))**0.5
+    t.left(180-math.degrees(math.atan(base/height)))
+    t.forward(hypotenuse)
+
 if __name__ == "__main__":
     root = tk.Tk()
     canvas = tk.Canvas(root, width=500, height=500)
@@ -62,7 +71,8 @@ if __name__ == "__main__":
     t.penup()
     t.goto(-200, -175)
     t.pendown()
-    draw_sierpinski(400, 6)
+    #draw_sierpinski(400, 6)
+    r_triangle(300,200)
     t.hideturtle()
 
     dump_gui()
