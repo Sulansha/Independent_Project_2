@@ -20,8 +20,8 @@ def dump_gui():
 
     x0 = root.winfo_rootx()
     y0 = root.winfo_rooty()
-    x1 = x0 + root.winfo_width()
-    y1 = y0 + root.winfo_height()
+    x1 = x0 + 2*root.winfo_width()
+    y1 = y0 + 2*root.winfo_height()
     ImageGrab.grab().crop((x0, y0, x1, y1)).save("gui_image_grabbed.png")
 
 
@@ -74,6 +74,7 @@ if __name__ == "__main__":
     #draw_sierpinski(400, 6)
     r_triangle(300,200)
     t.hideturtle()
+
 
     dump_gui()
 
