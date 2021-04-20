@@ -42,6 +42,16 @@ def draw_sierpinski(length, depth):
         t.bk(length / 2)
         t.right(60)
 
+def quadrilateral(length, width, rotation):
+    t.right(rotation)
+    t.fd(length)
+    t.left(90)
+    t.fd(width)
+    t.left(90)
+    t.fd(length)
+    t.left(90)
+    t.fd(width)
+
 if __name__ == "__main__":
     root = tk.Tk()
     canvas = tk.Canvas(root, width=500, height=500)
