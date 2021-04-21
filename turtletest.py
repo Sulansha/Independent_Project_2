@@ -220,13 +220,13 @@ if __name__ == "__main__":
   
     #draw_sierpinski(400, 6)
 
-    #different ideas: uncomment at will to check them out. 
+    # different ideas: uncomment at will to check them out. 
     # You can experiment with trying more than one concept at a time.
 
     concept5(number=20)
     #concept1()
-    concept2()
-    concept3()
+    concept2(rotation_amt=72)
+    concept3(rotation_amt=30)
     #concept4()
     
 
