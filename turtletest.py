@@ -60,6 +60,27 @@ def quadrilateral(length, width, rotation=0):
     t.fd(width)
     t.left(90)
 
+def kite(a1, a2, b):
+    """
+    constructs kite when given diagonals
+    a1 and a2 - the lengths of each part of main diagonal
+    b1 - the lengths of each half of cross diagonal
+    """
+    side1 = math.sqrt(a1**2 + b**2)
+    side2 = math.sqrt(a2**2 + b**2)
+
+    angle1 = math.degrees(math.atan(a1/b)) + math.degrees(math.atan(a2/b))
+    angle2 = 2*math.degrees(math.atan(b/a2))
+
+    t.forward(side1)
+    t.left(180-angle1)
+    t.forward(side2)
+    t.left(180-angle2)
+    t.forward(side2)
+    t.left(180-angle1)
+    t.forward(side1)
+    t.left(180-angle2)
+
 def triangle(a, b, c):
     """
     constructs a triangle given three sides. 
@@ -101,14 +122,14 @@ def xframepoint(width, start_x):
     """
     gives an x-coordinate inside the frame window
     """
-    x_cor = random.randint(start_x, start_x + length)
+    x_cor = random.randint(start_x + 10, start_x + length -10)
     return x_cor
 
 def yframepoint(width, start_y):
     """
     gives an y-coordinate inside the frame window
     """
-    y_cor = random.randint(start_y, start_y + width)
+    y_cor = random.randint(start_y + 10, start_y + width - 10)
     return y_cor
 
 def rand_size(end):
@@ -168,13 +189,17 @@ def concept2(rotation_amt = 60,radius = 70):
         t.circle(radius)
         t.left(rotation_amt)
 
-def concept3(rotation_amt = 60, size = 80):
+
+def concept3(rotation_amt=60, length=80, width=80):
     """
-    draws rotating squares at the center of the frame
+    draws rotating quadrilaterals at the center of the frame
+
+    you can select any rotation amt, but it is more pleasing
+    to the eye to select one that is divisible by 360.
     """
     center()
     for i in range(0, 360, rotation_amt):
-        quadrilateral(size, size)
+        quadrilateral(length, width)
         t.left(rotation_amt)
 
 def concept4():
@@ -206,6 +231,34 @@ def concept5(radius=100, number=10):
         t.dot(diameter, 'black')
         t.dot(diameter - 2, 'white')
 
+def concept6(a1, a2, b, rotation_amt=60, times = 5, center=1):
+    """
+    draws rotating kites at the center of the frame
+
+    times- number of rotations
+    center- setting as 1 centers the piece each time
+
+    you can select any rotation amt, but it is more pleasing
+    to the eye to select one that is divisible by 360.
+    """
+    if (center==1):
+        center()
+    for i in range(0, times*rotation_amt, rotation_amt):
+        kite(a1, a2, b)
+        t.left(rotation_amt)
+
+
+def concept7(a, b, c, rotation_amt=60, center=1):
+    """
+    draws rotating triangles at the center of the frame
+    setting center as 1 centers the piece each time
+    """
+    if (center == 1):
+        center()
+    for i in range(0, 360, rotation_amt):
+        triangle(a,b,c)
+        t.left(rotation_amt)
+
 if __name__ == "__main__":
     length = 300 #x
     width = 400 #y
@@ -223,11 +276,16 @@ if __name__ == "__main__":
     # different ideas: uncomment at will to check them out. 
     # You can experiment with trying more than one concept at a time.
 
-    concept5(number=20)
+    #concept5(number=20)
     #concept1()
-    concept2(rotation_amt=72)
-    concept3(rotation_amt=30)
+    #concept2(rotation_amt=60)
+    #concept3(rotation_amt=10)
     #concept4()
+
+    for i in range(0,7):
+        change_location()
+        concept7(50,50,50,rotation_amt=30, center=0)
+    #concept3(rotation_amt=90)
     
 
     #print(t.pos())
@@ -235,7 +293,7 @@ if __name__ == "__main__":
     t.hideturtle()
 
 
-    dump_gui()
+    #dump_gui()
 
     root.mainloop()
 
