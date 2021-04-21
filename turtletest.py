@@ -25,7 +25,7 @@ def dump_gui():
     y0 = root.winfo_rooty()
     x1 = x0 + 2*root.winfo_width()
     y1 = y0 + 2*root.winfo_height()
-    ImageGrab.grab().crop((x0, y0, x1, y1)).save("gui_image_grabbed.png")
+    ImageGrab.grab().crop((x0, y0, x1, y1)).save("gui_image_grabbed1.png")
 
 def draw_sierpinski(length, depth):
     if depth == 0:
@@ -72,36 +72,6 @@ def r_triangle(base, height):
     t.left(180-math.degrees(math.atan(base/height)))
     t.forward(hypotenuse)
 
-def y_fractal(depth):
-    def sierpinski_tree(x, y, length, tilt, n):
-    if n == 0:
-        return
-    turtle.up()
-    turtle.goto(x, y)
-    turtle.seth(tilt)
-    turtle.down()
-    turtle.fd(length)
-    sierpinski_tree(turtle.xcor(), turtle.ycor(),
-                    length/2, turtle.heading(), n-1)
-
-    turtle.up()
-    turtle.goto(x, y)
-    turtle.seth(tilt+20)
-    turtle.down()
-    turtle.fd(length)
-    sierpinski_tree(turtle.xcor(), turtle.ycor(),
-                    length/2, turtle.heading(), n-1)
-
-    turtle.up()
-    turtle.goto(x, y)
-    turtle.seth(tilt-20)
-    turtle.down()
-    turtle.fd(length)
-    sierpinski_tree(turtle.xcor(), turtle.ycor(),
-                    length/2, turtle.heading(), n-1)
-
-
-
 def xframepoint(width, start_x):
     x_cor = random.randint(start_x, start_x + length)
     return x_cor
@@ -132,6 +102,14 @@ def rand_rotate():
     else:
         t.right(rand_angle)
 
+def concept1():
+    for i in range(0, 6):
+        change_location()
+        rand_rotate
+        r_triangle(xsize(300), ysize(200))
+        change_location()
+        rand_rotate
+        quadrilateral(xsize(200), ysize(200))
 
 if __name__ == "__main__":
     length = 300 #x
@@ -146,13 +124,7 @@ if __name__ == "__main__":
     frame(length,width)  
   
     #draw_sierpinski(400, 6)
-    for i in range(0,6):
-        change_location()
-        rand_rotate
-        r_triangle(xsize(300), ysize(200))
-        change_location()
-        rand_rotate
-        quadrilateral(xsize(200), ysize(200))
+    concept1
 
     print(t.pos())
     t.hideturtle()
