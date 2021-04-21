@@ -46,6 +46,9 @@ def draw_sierpinski(length, depth):
         t.right(60)
 
 def quadrilateral(length, width, rotation=0):
+    """
+    constructs a square/rectangle if given length and width
+    """
     t.right(rotation)
     t.fd(length)
     t.left(90)
@@ -59,6 +62,7 @@ def quadrilateral(length, width, rotation=0):
 def triangle(a, b, c):
     """
     constructs a triangle given three sides. 
+    If the side lengths given cannot construct a triangle, does nothing.
     """
     if ((a + b > c) and (a + c > b) and (b + c > a)):
         angle1 = math.acos((b**2 + c**2 - a**2)/(2*b*c))
@@ -72,6 +76,9 @@ def triangle(a, b, c):
         t.forward(0)
 
 def frame(length, width, start_x=-150, start_y=-175):
+    """
+    creates the rectangular frame for the piece.
+    """
     t.speed(0)
     t.penup()
     t.goto(start_x, start_y)
@@ -79,6 +86,9 @@ def frame(length, width, start_x=-150, start_y=-175):
     quadrilateral(length, width)
 
 def r_triangle(base, height):
+    """
+    draws a right-angled triangle if given base and height
+    """
     t.forward(base)
     t.left(90)
     t.forward(height)
@@ -87,25 +97,43 @@ def r_triangle(base, height):
     t.forward(hypotenuse)
 
 def xframepoint(width, start_x):
+    """
+    gives an x-coordinate inside the frame window
+    """
     x_cor = random.randint(start_x, start_x + length)
     return x_cor
 
 def yframepoint(width, start_y):
+    """
+    gives an y-coordinate inside the frame window
+    """
     y_cor = random.randint(start_y, start_y + width)
     return y_cor
 
 def rand_size(end):
+    """
+    gives a random integer from 20 to the specified endpoint
+    """
     return random.randint(20,end)
 
 def change_location():
+    """
+    randomly changes the location of the pointer inside the frame
+    """
     t.penup()
     t.goto(xframepoint(length, start_x), yframepoint(width, start_y))
     t.pendown()
 
 def rand_angle():
+    """
+    returns an integer from 1 to 360 (inclusive)
+    """
     return random.randint(0,360)
 
 def rand_rotate():
+    """
+    rotates the pointer in either the left or right direction a random degree.
+    """
     guess = random.randint(0,2)
     
     if (guess == 1):
@@ -114,6 +142,9 @@ def rand_rotate():
         t.right(rand_angle())
 
 def concept1():
+    """
+    draws randomly created right-triangles and rectangles 
+    """
     for i in range(0, 3):
         change_location()
         rand_rotate()
@@ -123,22 +154,31 @@ def concept1():
         quadrilateral(rand_size(200), rand_size(200))
 
 def concept2():
+    """
+    draws rotating circles at the center of the frame
+    """
     t.penup()
-    t.goto(-150 + 300/2, -175 + 400/2)
+    t.goto(start_x + length/2, start_y + width/2)
     t.pendown()
     for i in range(0,6):
         t.circle(70)
         t.left(60)
 
 def concept3():
+    """
+    draws rotating squares at the center of the frame
+    """
     t.penup()
-    t.goto(-150 + 300/2, -175 + 400/2)
+    t.goto(start_x + length/2, start_y + width/2)
     t.pendown()
     for i in range(0, 6):
         quadrilateral(80,80)
         t.left(60)
 
 def concept4():
+    """
+    draws randomly created triangles and rectangles
+    """
     for i in range(0, 3):
         change_location()
         rand_rotate()
