@@ -56,14 +56,20 @@ def quadrilateral(length, width, rotation=0):
     t.fd(width)
     t.left(90)
 
-def triangle(side1,side2,side3):
+def triangle(a, b, c):
     """
     constructs a triangle given three sides. 
     """
-    if ((side1 + side2 > side3) and (side1 + side3 > side2) and (side2 + side3 > side1)):
-        #write code
+    if ((a + b > c) and (a + c > b) and (b + c > a)):
+        angle1 = math.acos((b**2 + c**2 - a**2)/(2*b*c))
+        angle2 = math.acos((a**2 + c**2 - b**2)/(2*a*c))
+        t.forward(b)
+        t.left(180 - math.degrees(angle1))
+        t.forward(c)
+        t.left(180 - math.degrees(angle2))
+        t.forward(a)
     else:
-        #do nothing
+        t.forward(0)
 
 def frame(length, width, start_x=-150, start_y=-175):
     t.speed(0)
@@ -88,10 +94,7 @@ def yframepoint(width, start_y):
     y_cor = random.randint(start_y, start_y + width)
     return y_cor
 
-def xsize(end):
-    return random.randint(20,end)
-
-def ysize(end):
+def rand_size(end):
     return random.randint(20,end)
 
 def change_location():
@@ -114,10 +117,10 @@ def concept1():
     for i in range(0, 3):
         change_location()
         rand_rotate()
-        r_triangle(xsize(300), ysize(200))
+        r_triangle(rand_size(300), rand_size(200))
         change_location()
         rand_rotate()
-        quadrilateral(xsize(200), ysize(200))
+        quadrilateral(rand_size(200), rand_size(200))
 
 def concept2():
     t.penup()
@@ -136,6 +139,13 @@ def concept3():
         t.left(60)
 
 def concept4():
+    for i in range(0, 3):
+        change_location()
+        rand_rotate()
+        triangle(rand_size(300), rand_size(300), rand_size(300))
+        change_location()
+        rand_rotate()
+        quadrilateral(rand_size(200), rand_size(200))
 
 if __name__ == "__main__":
     length = 300 #x
@@ -157,9 +167,11 @@ if __name__ == "__main__":
     #concept1()
     #concept2()
     #concept3()
+    concept4()
     
 
     #print(t.pos())
+    #triangle(80,70,70)
 
     t.hideturtle()
 
