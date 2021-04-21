@@ -178,11 +178,11 @@ def center():
     t.goto(start_x + length/2, start_y + width/2)
     t.pendown()
 
-def concept1():
+def concept1(repeat=4):
     """
     draws randomly created right-triangles and rectangles 
     """
-    for i in range(0, 3):
+    for i in range(0, repeat):
         change_location()
         rand_rotate()
         r_triangle(rand_size(300), rand_size(200))
@@ -212,11 +212,11 @@ def concept3(rotation_amt=60, length=80, width=80):
         quadrilateral(length, width)
         t.left(rotation_amt)
 
-def concept4():
+def concept4(repeat=4):
     """
     draws randomly created triangles and rectangles
     """
-    for i in range(0, 4):
+    for i in range(0, repeat):
         change_location()
         rand_rotate()
         triangle(rand_size(300), rand_size(300), rand_size(300))
@@ -241,7 +241,7 @@ def concept5(radius=100, number=10):
         t.dot(diameter, 'black')
         t.dot(diameter - 2, 'white')
 
-def concept6(a1, a2, b, rotation_amt=60, times = 5, center=1):
+def concept6(a1, a2, b, rotation_amt=60, times = 5, c=1):
     """
     draws rotating kites at the center of the frame
 
@@ -251,23 +251,35 @@ def concept6(a1, a2, b, rotation_amt=60, times = 5, center=1):
     you can select any rotation amt, but it is more pleasing
     to the eye to select one that is divisible by 360.
     """
-    if (center==1):
+    if (c==1):
         center()
     for i in range(0, times*rotation_amt, rotation_amt):
         kite(a1, a2, b)
         t.left(rotation_amt)
 
 
-def concept7(a, b, c, rotation_amt=60, center=1):
+def concept7(a, b, c, rotation_amt=60, cen=1):
     """
     draws rotating triangles at the center of the frame
     setting center as 1 centers the piece each time
     """
-    if (center == 1):
+    if (c == 1):
         center()
     for i in range(0, 360, rotation_amt):
         triangle(a,b,c)
         t.left(rotation_amt)
+
+def concept8(side, rotation_amt=180, c=1, times=3):
+    """
+    draws rotating hexagons at the center of the frame
+    setting center as 1 centers the piece each time
+    """
+    if (c == 1):
+        center()
+    for i in range(0, times*rotation_amt, rotation_amt):
+        hexagon(50)
+        t.left(rotation_amt)
+
 
 if __name__ == "__main__":
     length = 300 #x
@@ -290,13 +302,14 @@ if __name__ == "__main__":
     #concept1()
     #concept2(rotation_amt=60)
     #concept3(rotation_amt=10)
-    #concept4()
+    concept4()
 
-    for i in range(0,7):
-        change_location()
-        concept7(50,50,50,rotation_amt=30, center=0)
+    #for i in range(0,7):
+        #change_location()
+        #concept7(50,50,50,rotation_amt=30, center=0)
     #concept3(rotation_amt=90)
     
+    #concept8(50)
 
     #print(t.pos())
 
