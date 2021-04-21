@@ -18,6 +18,9 @@ import random
 def dump_gui():
     """
     takes a png screenshot of a tkinter window, and saves it on in cwd
+    it will prompt with 'save as?'
+    type after the prompt on the terminal then press enter
+    it will use the input to customize the file name.
     """
     print('...dumping gui window to png')
 
@@ -110,8 +113,12 @@ def triangle(a, b, c):
 def frame(length, width, start_x=-150, start_y=-175):
     """
     creates the rectangular frame for the piece.
+    length - x
+    width - y
+
+    start_x - x-coordinate of bottom left of frame
+    start_y - y-coordinate of bottom left of frame
     """
-    t.speed(0)
     t.penup()
     t.goto(start_x, start_y)
     t.pendown()
@@ -174,6 +181,9 @@ def rand_rotate():
         t.right(rand_angle())
 
 def center():
+    """
+    moves the turtle pointer to the center of the frame
+    """
     t.penup()
     t.goto(start_x + length/2, start_y + width/2)
     t.pendown()
@@ -181,6 +191,9 @@ def center():
 def concept1(repeat=4):
     """
     draws randomly created right-triangles and rectangles 
+
+    repeat- number of times the code will loop
+            creating a triangle and rectangle each time
     """
     for i in range(0, repeat):
         change_location()
@@ -190,9 +203,17 @@ def concept1(repeat=4):
         rand_rotate()
         quadrilateral(rand_size(200), rand_size(200))
 
-def concept2(rotation_amt = 60,radius = 70):
+def concept2(rotation_amt = 60,radius = 70, c=1):
     """
     draws rotating circles at the center of the frame
+
+    radius - center of circle
+
+    rotation_amt - the degree the pointer will rotate
+                    before drawing the next polygon
+    
+    c - setting as 1 automatically centers the drawing 
+        setting as any other number will not center the drawing
     """
     center()
     for i in range(0,360, rotation_amt):
@@ -245,8 +266,12 @@ def concept6(a1, a2, b, rotation_amt=60, times = 5, c=1):
     """
     draws rotating kites at the center of the frame
 
-    times- number of rotations
-    center- setting as 1 centers the piece each time
+    times - number of rotations made by the pointer
+
+    c -  setting as 1 centers the piece each time
+
+    rotation_amt - the degree the pointer will rotate
+                    before drawing the next polygon
 
     you can select any rotation amt, but it is more pleasing
     to the eye to select one that is divisible by 360.
@@ -262,6 +287,8 @@ def concept7(a, b, c, rotation_amt=60, cen=1):
     """
     draws rotating triangles at the center of the frame
     setting center as 1 centers the piece each time
+
+    cen - setting as 1 centers the piece each time
     """
     if (c == 1):
         center()
@@ -291,7 +318,10 @@ if __name__ == "__main__":
     canvas = tk.Canvas(root, width=500, height=500)
     canvas.pack()
     t = turtle.RawTurtle(canvas)
+    t.speed(0)
+
     frame(length,width)  
+
   
     #draw_sierpinski(400, 6)
 
@@ -315,7 +345,8 @@ if __name__ == "__main__":
 
     t.hideturtle()
 
-
+    # uncomment the line below this if you'd like to save the figure
+    # you must uncomment it before running the code.
     #dump_gui()
 
     root.mainloop()
