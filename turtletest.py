@@ -25,7 +25,8 @@ def dump_gui():
     y0 = root.winfo_rooty()
     x1 = x0 + 2*root.winfo_width()
     y1 = y0 + 2*root.winfo_height()
-    ImageGrab.grab().crop((x0, y0, x1, y1)).save("gui_image_grabbed1.png")
+    figurename = input("save as?")
+    ImageGrab.grab().crop((x0, y0, x1, y1)).save("gui_image_grabbed_" + figurename + ".png")
 
 def draw_sierpinski(length, depth):
     if depth == 0:
@@ -141,6 +142,11 @@ def rand_rotate():
     else:
         t.right(rand_angle())
 
+def center():
+    t.penup()
+    t.goto(start_x + length/2, start_y + width/2)
+    t.pendown()
+
 def concept1():
     """
     draws randomly created right-triangles and rectangles 
@@ -153,39 +159,52 @@ def concept1():
         rand_rotate()
         quadrilateral(rand_size(200), rand_size(200))
 
-def concept2():
+def concept2(rotation_amt = 60,radius = 70):
     """
     draws rotating circles at the center of the frame
     """
-    t.penup()
-    t.goto(start_x + length/2, start_y + width/2)
-    t.pendown()
-    for i in range(0,6):
-        t.circle(70)
-        t.left(60)
+    center()
+    for i in range(0,360, rotation_amt):
+        t.circle(radius)
+        t.left(rotation_amt)
 
-def concept3():
+def concept3(rotation_amt = 60, size = 80):
     """
     draws rotating squares at the center of the frame
     """
-    t.penup()
-    t.goto(start_x + length/2, start_y + width/2)
-    t.pendown()
-    for i in range(0, 6):
-        quadrilateral(80,80)
-        t.left(60)
+    center()
+    for i in range(0, 360, rotation_amt):
+        quadrilateral(size, size)
+        t.left(rotation_amt)
 
 def concept4():
     """
     draws randomly created triangles and rectangles
     """
-    for i in range(0, 3):
+    for i in range(0, 4):
         change_location()
         rand_rotate()
         triangle(rand_size(300), rand_size(300), rand_size(300))
         change_location()
         rand_rotate()
         quadrilateral(rand_size(200), rand_size(200))
+
+def concept5(radius=100, number=10):
+    """
+    creates the stated concentric number of circles.
+
+    number - distance between consecutive circles
+    radius - radius of largest circle
+
+    since it creates circles by filling in with bucket tool, 
+    if you would like to use this 
+    with other concepts,
+    use this one FIRST.
+    """
+    center()
+    for diameter in range(radius * 2, 0, -2*number):
+        t.dot(diameter, 'black')
+        t.dot(diameter - 2, 'white')
 
 if __name__ == "__main__":
     length = 300 #x
@@ -204,14 +223,14 @@ if __name__ == "__main__":
     #different ideas: uncomment at will to check them out. 
     # You can experiment with trying more than one concept at a time.
 
+    concept5(number=20)
     #concept1()
-    #concept2()
-    #concept3()
-    concept4()
+    concept2()
+    concept3()
+    #concept4()
     
 
     #print(t.pos())
-    #triangle(80,70,70)
 
     t.hideturtle()
 
