@@ -22,15 +22,19 @@ def dump_gui():
     type after the prompt on the terminal then press enter
     it will use the input to customize the file name.
     """
-    print('...dumping gui window to png')
+    save = input("save file?")
+    if (save == 'y'):
+        print('...dumping gui window to png')
+        x0 = root.winfo_rootx()
+        y0 = root.winfo_rooty()
+        x1 = x0 + 2*root.winfo_width()
+        y1 = y0 + 2*root.winfo_height()
+        figurename = input("save as?")
+        ImageGrab.grab().crop((x0, y0, x1, y1)).save(
+            "gui_image_grabbed_" + figurename + ".png")
 
-    x0 = root.winfo_rootx()
-    y0 = root.winfo_rooty()
-    x1 = x0 + 2*root.winfo_width()
-    y1 = y0 + 2*root.winfo_height()
-    figurename = input("save as?")
-    ImageGrab.grab().crop((x0, y0, x1, y1)).save("gui_image_grabbed_" + figurename + ".png")
 
+    
 def draw_sierpinski(length, depth):
     if depth == 0:
         for i in range(0, 3):
@@ -113,10 +117,13 @@ def triangle(a, b, c):
 def frame(length, width, start_x=-150, start_y=-175):
     """
     creates the rectangular frame for the piece.
+
     length - x
+
     width - y
 
     start_x - x-coordinate of bottom left of frame
+
     start_y - y-coordinate of bottom left of frame
     """
     t.penup()
@@ -209,11 +216,10 @@ def concept2(rotation_amt = 60,radius = 70, c=1):
 
     radius - center of circle
 
-    rotation_amt - the degree the pointer will rotate
-                    before drawing the next polygon
+    rotation_amt - the degree the pointer will rotate before drawing the next polygon
     
     c - setting as 1 automatically centers the drawing 
-        setting as any other number will not center the drawing
+    setting as any other number will not center the drawing
     """
     center()
     for i in range(0,360, rotation_amt):
@@ -245,21 +251,22 @@ def concept4(repeat=4):
         rand_rotate()
         quadrilateral(rand_size(200), rand_size(200))
 
-def concept5(radius=100, number=10):
+def concept5(radius=100, number=10, color1= 'black'):
     """
     creates the stated concentric number of circles.
 
     number - distance between consecutive circles
+
     radius - radius of largest circle
 
     since it creates circles by filling in with bucket tool, 
     if you would like to use this 
     with other concepts,
-    use this one FIRST.
+    use this one FIRST (it should be the first concept run).
     """
     center()
     for diameter in range(radius * 2, 0, -2*number):
-        t.dot(diameter, 'black')
+        t.dot(diameter, color1)
         t.dot(diameter - 2, 'white')
 
 def concept6(a1, a2, b, rotation_amt=60, times = 5, c=1):
@@ -271,7 +278,7 @@ def concept6(a1, a2, b, rotation_amt=60, times = 5, c=1):
     c -  setting as 1 centers the piece each time
 
     rotation_amt - the degree the pointer will rotate
-                    before drawing the next polygon
+    before drawing the next polygon
 
     you can select any rotation amt, but it is more pleasing
     to the eye to select one that is divisible by 360.
@@ -304,7 +311,7 @@ def concept8(side, rotation_amt=180, c=1, times=3):
     if (c == 1):
         center()
     for i in range(0, times*rotation_amt, rotation_amt):
-        hexagon(50)
+        hexagon(side)
         t.left(rotation_amt)
 
 
@@ -318,9 +325,9 @@ if __name__ == "__main__":
     canvas = tk.Canvas(root, width=500, height=500)
     canvas.pack()
     t = turtle.RawTurtle(canvas)
-    t.speed(0)
+    t.speed(100)
 
-    frame(length,width)  
+    #frame(length,width)  
 
   
     #draw_sierpinski(400, 6)
@@ -329,17 +336,18 @@ if __name__ == "__main__":
     # You can experiment with trying more than one concept at a time.
 
     #concept5(number=20)
-    #concept1()
-    #concept2(rotation_amt=60)
-    #concept3(rotation_amt=10)
-    concept4()
+    concept1()
+    #concept2(rotation_amt=40, radius=50)
+    #concept3(rotation_amt=60)
+    #concept6(50,10,15, times= 18)
+    #concept4()
 
     #for i in range(0,7):
         #change_location()
         #concept7(50,50,50,rotation_amt=30, center=0)
     #concept3(rotation_amt=90)
     
-    #concept8(50)
+    #concept8(120)
 
     #print(t.pos())
 
@@ -347,7 +355,7 @@ if __name__ == "__main__":
 
     # uncomment the line below this if you'd like to save the figure
     # you must uncomment it before running the code.
-    #dump_gui()
+    dump_gui()
 
     root.mainloop()
 
