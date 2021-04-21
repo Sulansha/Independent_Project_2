@@ -56,11 +56,19 @@ def quadrilateral(length, width, rotation=0):
     t.fd(width)
     t.left(90)
 
+def triangle(side1,side2,side3):
+    """
+    constructs a triangle given three sides. 
+    """
+    if ((side1 + side2 > side3) and (side1 + side3 > side2) and (side2 + side3 > side1)):
+        #write code
+    else:
+        #do nothing
+
 def frame(length, width, start_x=-150, start_y=-175):
     t.speed(0)
     t.penup()
     t.goto(start_x, start_y)
-    #position = [[t.pos()[0][0], t.pos()[0] + length], [t.pos()[1], t.pos()[1] + width]]
     t.pendown()
     quadrilateral(length, width)
 
@@ -97,19 +105,37 @@ def rand_angle():
 def rand_rotate():
     guess = random.randint(0,2)
     
-    if guess == 1:
-        t.left(rand_angle)
+    if (guess == 1):
+        t.left(rand_angle())
     else:
-        t.right(rand_angle)
+        t.right(rand_angle())
 
 def concept1():
-    for i in range(0, 6):
+    for i in range(0, 3):
         change_location()
-        rand_rotate
+        rand_rotate()
         r_triangle(xsize(300), ysize(200))
         change_location()
-        rand_rotate
+        rand_rotate()
         quadrilateral(xsize(200), ysize(200))
+
+def concept2():
+    t.penup()
+    t.goto(-150 + 300/2, -175 + 400/2)
+    t.pendown()
+    for i in range(0,6):
+        t.circle(70)
+        t.left(60)
+
+def concept3():
+    t.penup()
+    t.goto(-150 + 300/2, -175 + 400/2)
+    t.pendown()
+    for i in range(0, 6):
+        quadrilateral(80,80)
+        t.left(60)
+
+def concept4():
 
 if __name__ == "__main__":
     length = 300 #x
@@ -124,9 +150,17 @@ if __name__ == "__main__":
     frame(length,width)  
   
     #draw_sierpinski(400, 6)
-    concept1
 
-    print(t.pos())
+    #different ideas: uncomment at will to check them out. 
+    # You can experiment with trying more than one concept at a time.
+
+    #concept1()
+    #concept2()
+    #concept3()
+    
+
+    #print(t.pos())
+
     t.hideturtle()
 
 
