@@ -81,6 +81,16 @@ def kite(a1, a2, b):
     t.forward(side1)
     t.left(180-angle2)
 
+def hexagon(side):
+    """
+    constructs a hexagon if given side length
+    """
+    for i in range(0,5):
+        t.forward(side)
+        t.left(60)
+    
+    t.forward(side)
+
 def triangle(a, b, c):
     """
     constructs a triangle given three sides. 
