@@ -251,7 +251,7 @@ def concept4(repeat=4):
         rand_rotate()
         quadrilateral(rand_size(200), rand_size(200))
 
-def concept5(radius=100, number=10, color1= 'black'):
+def concept5(radius=100, number=10, color1= 'black', c=1):
     """
     creates the stated concentric number of circles.
 
@@ -264,7 +264,8 @@ def concept5(radius=100, number=10, color1= 'black'):
     with other concepts,
     use this one FIRST (it should be the first concept run).
     """
-    center()
+    if (c==1):
+        center()
     for diameter in range(radius * 2, 0, -2*number):
         t.dot(diameter, color1)
         t.dot(diameter - 2, 'white')
@@ -325,9 +326,9 @@ if __name__ == "__main__":
     canvas = tk.Canvas(root, width=500, height=500)
     canvas.pack()
     t = turtle.RawTurtle(canvas)
-    t.speed(100)
+    t.speed(0)
 
-    #frame(length,width)  
+    frame(length,width)  
 
   
     #draw_sierpinski(400, 6)
@@ -336,18 +337,17 @@ if __name__ == "__main__":
     # You can experiment with trying more than one concept at a time.
 
     #concept5(number=20)
-    concept1()
-    #concept2(rotation_amt=40, radius=50)
-    #concept3(rotation_amt=60)
-    #concept6(50,10,15, times= 18)
+    #concept1()
+    concept2(rotation_amt=30, radius=130)
+    concept3(rotation_amt=20, length= 160, width=150)
+    concept8(60,80,30, times= 19)
     #concept4()
-
-    #for i in range(0,7):
-        #change_location()
-        #concept7(50,50,50,rotation_amt=30, center=0)
+    for i in range(0,7):
+        change_location()
+        concept7(50,50,50,rotation_amt=30, cen=0)
     #concept3(rotation_amt=90)
     
-    #concept8(120)
+    concept8(120)
 
     #print(t.pos())
 
